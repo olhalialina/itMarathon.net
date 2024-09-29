@@ -26,10 +26,10 @@ public class ProposalsController(IProposalService proposalService, IMapper mappe
     [AllowAnonymous]
     [HttpGet]
     public async Task<ActionResult<DataPage<ProposalDto>>> GetAllProposals(
-       [FromQuery(Name = "$top")] int? top,
-       [FromQuery(Name = "$skip")] int? skip,
-       [FromQuery(Name = "$filter")] string? filter,
-       [FromQuery(Name = "$orderby")] string? orderby)
+        [FromQuery(Name = "$top")] int? top = 20,
+        [FromQuery(Name = "$skip")] int? skip = 0,
+        [FromQuery(Name = "$filter")] string? filter = "",
+        [FromQuery(Name = "$orderby")] string? orderby = "AppUserId asc")
     {
         return Ok(await proposalService.GetAllProposalsAsync(Request));
     }
